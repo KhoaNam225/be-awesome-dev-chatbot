@@ -3,8 +3,15 @@ from langchain_aws import AmazonKnowledgeBasesRetriever, ChatBedrock, BedrockEmb
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import LLMChainExtractor
 
+LLM = None
+
 
 def init_chat_model():
+    global LLM
+
+    if LLM is not None:
+        return LLM
+
     boto_session = boto3.Session(region_name="us-east-1")
     sts_client = boto_session.client("sts")
 
@@ -23,13 +30,13 @@ def init_chat_model():
         region_name="us-east-1",
     )
 
-    llm = ChatBedrock(
+    LLM = ChatBedrock(
         model_id="meta.llama3-70b-instruct-v1:0",
         region_name="us-east-1",
         client=bedrock_client,
     )
 
-    return llm
+    return LLM
 
 
 def init_embedding_model():
