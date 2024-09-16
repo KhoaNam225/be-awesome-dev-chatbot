@@ -1,11 +1,11 @@
 import boto3
-from langchain_aws import ChatBedrock, BedrockEmbeddings
+from langchain_aws import AmazonKnowledgeBasesRetriever, ChatBedrock, BedrockEmbeddings
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import LLMChainExtractor
 
 
 def init_chat_model():
-    boto_session = boto3.Session(
-        profile_name="bedrock-developer", region_name="us-east-1"
-    )
+    boto_session = boto3.Session(region_name="us-east-1")
     sts_client = boto_session.client("sts")
 
     assumed_role = sts_client.assume_role(
@@ -24,7 +24,7 @@ def init_chat_model():
     )
 
     llm = ChatBedrock(
-        model_id="meta.llama3-8b-instruct-v1:0",
+        model_id="meta.llama3-70b-instruct-v1:0",
         region_name="us-east-1",
         client=bedrock_client,
     )
@@ -33,9 +33,7 @@ def init_chat_model():
 
 
 def init_embedding_model():
-    boto_session = boto3.Session(
-        profile_name="bedrock-developer", region_name="us-east-1"
-    )
+    boto_session = boto3.Session(region_name="us-east-1")
     sts_client = boto_session.client("sts")
 
     assumed_role = sts_client.assume_role(
@@ -60,3 +58,52 @@ def init_embedding_model():
     )
 
     return embedding_model
+
+
+def init_retriever():
+    boto_session = boto3.Session(region_name="us-east-1")
+    sts_client = boto_session.client("sts")
+
+    assumed_role = sts_client.assume_role(
+        RoleArn="arn:aws:iam::629872170007:role/bedrock-developer",
+        RoleSessionName="be-awesome-dev-bedrock-developer",
+    )
+
+    credentials = assumed_role["Credentials"]
+
+    bedrock_client = boto3.client(
+        "bedrock-agent-runtime",
+        aws_access_key_id=credentials["AccessKeyId"],
+        aws_secret_access_key=credentials["SecretAccessKey"],
+        aws_session_token=credentials["SessionToken"],
+        region_name="us-east-1",
+    )
+
+    retriever = AmazonKnowledgeBasesRetriever(
+        knowledge_base_id="DTVLTPD9CK",
+        retrieval_config={"vectorSearchConfiguration": {"numberOfResults": 4}},
+        region_name="us-east-1",
+        client=bedrock_client,
+    )
+
+    return retriever
+
+
+def init_compression_retriever():
+    llm_for_compressor = init_chat_model()
+    compressor = LLMChainExtractor.from_llm(llm_for_compressor)
+    retriever = init_retriever()
+    compression_retriever = ContextualCompressionRetriever(
+        base_compressor=compressor,
+        base_retriever=retriever,
+    )
+
+    return compression_retriever
+
+
+def pretty_print_docs(docs):
+    print(
+        f"\n{'-' * 100}\n".join(
+            [f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(docs)]
+        )
+    )
