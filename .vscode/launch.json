@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "API be-awesome-dev-chatbot:HelloWorldFunction",
+      "invokeTarget": {
+        "target": "api",
+        "templatePath": "${workspaceFolder}/template.yaml",
+        "logicalId": "HelloWorldFunction"
+      },
+      "lambda": {
+        "runtime": "python3.11"
+      },
+      "api": {
+        "path": "/chat",
+        "httpMethod": "get",
+        "payload": {
+          "json": {
+            "chatHistory": [
+              {
+                "type": "Human",
+                "message": "Hello!"
+              },
+              {
+                "type": "Ai",
+                "message": "How are you?"
+              }
+            ],
+            "newMessage": "Can you explain to me what Promise is in Javascript?"
+          }
+        }
+      }
+    }
+  ]
+}
