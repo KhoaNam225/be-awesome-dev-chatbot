@@ -7,13 +7,8 @@ name = "pypi"
 langchain = "*"
 langchain-core = "*"
 langchain-community = "*"
-jupyter = "*"
-langchain-openai = "*"
 boto3 = "*"
 langchain-aws = "*"
-nltk = "*"
-unstructured = {extras = ["md"], version = "*"}
-chromadb = "*"
 
 [dev-packages]
 
