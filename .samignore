@@ -1,0 +1,6 @@
+*.ipynb
+Pipfile
+Pipfile.lock
+*.md
+.vscode/
+.samignore
