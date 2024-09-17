@@ -16,8 +16,8 @@ def init_chat_model():
     sts_client = boto_session.client("sts")
 
     assumed_role = sts_client.assume_role(
-        RoleArn="arn:aws:iam::629872170007:role/bedrock-developer",
-        RoleSessionName="be-awesome-dev-bedrock-developer",
+        RoleArn="arn:aws:iam::629872170007:role/bedrock-consumer",
+        RoleSessionName="be-awesome-dev-bedrock-consumer",
     )
 
     credentials = assumed_role["Credentials"]
@@ -72,8 +72,8 @@ def init_retriever():
     sts_client = boto_session.client("sts")
 
     assumed_role = sts_client.assume_role(
-        RoleArn="arn:aws:iam::629872170007:role/bedrock-developer",
-        RoleSessionName="be-awesome-dev-bedrock-developer",
+        RoleArn="arn:aws:iam::629872170007:role/bedrock-consumer",
+        RoleSessionName="be-awesome-dev-bedrock-consumer",
     )
 
     credentials = assumed_role["Credentials"]

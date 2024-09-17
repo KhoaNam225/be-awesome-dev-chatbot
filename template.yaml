@@ -36,7 +36,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   BeAwesomeDevApi:
     Description: API Gateway endpoint URL for Prod stage for BeAwesomeDevChatBot Function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/be-awesome-dev/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
   BeAwesomeDevChatBotFunction:
     Description: BeAwesomeDevChatBot Lambda Function ARN
     Value: !GetAtt BeAwesomeDevChatBotFunction.Arn

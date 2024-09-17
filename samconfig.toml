@@ -3,7 +3,7 @@
 version = 0.1
 
 [default.global.parameters]
-stack_name = "chat-bot-function"
+stack_name = "be-awsesome-dev-chatbot-function"
 
 [default.build.parameters]
 cached = true
@@ -16,7 +16,6 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-stack_name = "be-awsesome-dev-chatbot-function"
 s3_prefix = "be-awsesome-dev-chatbot-function"
 region = "us-east-1"
 image_repositories = []
