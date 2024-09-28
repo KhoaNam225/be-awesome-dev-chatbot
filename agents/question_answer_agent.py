@@ -17,7 +17,9 @@ def create_qa_agent():
   If there is no context provided for you, that means the question is not asking about something relevant to the website content.
   In the case, reply politely and ask the user to check the question again.
 
-  DO NOT answer the question if there is not context. ONLY answer if there is context provided.
+  If there is no context provided to you, reply to the user that the website doesn't have information related to the question asked. However, if the user doesn't ask any question and just greet you, reply appropriately.
+
+  Here is the context from the website, answer the question based on the information in the context:
 
   {context}"""
     qa_prompt = ChatPromptTemplate.from_messages(
