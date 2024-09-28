@@ -5,7 +5,7 @@ from agents.question_answer_agent import create_qa_agent
 
 
 def lambda_handler(events, context):
-    allowed_origins = ["http://localhost:3000", "https://djcogs8kyls7c.cloudfront.net/"]
+    allowed_origins = ["http://localhost:3000", "https://djcogs8kyls7c.cloudfront.net"]
     origin = events.get("headers", {}).get("origin", "")
 
     if origin in allowed_origins:
