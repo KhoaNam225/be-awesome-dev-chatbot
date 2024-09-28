@@ -87,7 +87,7 @@ def init_retriever():
     )
 
     retriever = AmazonKnowledgeBasesRetriever(
-        knowledge_base_id="DTVLTPD9CK",
+        knowledge_base_id="KAO6CTXNKO",
         retrieval_config={"vectorSearchConfiguration": {"numberOfResults": 4}},
         region_name="us-east-1",
         client=bedrock_client,

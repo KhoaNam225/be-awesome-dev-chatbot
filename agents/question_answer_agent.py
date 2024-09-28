@@ -13,7 +13,7 @@ def create_qa_agent():
   Use the following pieces of retrieved context to answer the question.
   If you don't know the answer, just say that you don't know.
   
-  Answer the question as descriptive and clear as possible. Give some example if possible.
+  Answer the question as descriptive and clear as possible. Give some code examples if possible.
   If there is no context provided for you, that means the question is not asking about something relevant to the website content.
   In the case, reply politely and ask the user to check the question again.
 

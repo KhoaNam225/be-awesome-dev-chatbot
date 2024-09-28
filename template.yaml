@@ -21,6 +21,7 @@ Resources:
       Handler: main.lambda_handler
       Runtime: python3.11
       Timeout: 300
+      Role: arn:aws:iam::629872170007:role/be-awesome-dev-chatbot-function-role
       Architectures:
         - x86_64
       Events:
@@ -42,4 +43,4 @@ Outputs:
     Value: !GetAtt BeAwesomeDevChatBotFunction.Arn
   BeAwesomeDevChatBotFunctionIamRole:
     Description: Implicit IAM Role created for BeAwesomeDevChatBot function
-    Value: !GetAtt BeAwesomeDevChatBotFunctionRole.Arn
+    Value: arn:aws:iam::629872170007:role/be-awesome-dev-chatbot-function-role
