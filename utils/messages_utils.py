@@ -10,7 +10,6 @@ class MessageType(Enum):
 
 def process_chat_history_from_request(req_chat_history: list) -> List[BaseMessage]:
     chat_history = []
-
     for item in req_chat_history:
         type = item["type"]
         content = item["message"]
