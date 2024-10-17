@@ -47,6 +47,3 @@ Outputs:
   BeAwesomeDevChatBotFunction:
     Description: BeAwesomeDevChatBot Lambda Function ARN
     Value: !GetAtt BeAwesomeDevChatBotFunction.Arn
-  BeAwesomeDevChatBotFunctionIamRole:
-    Description: Implicit IAM Role created for BeAwesomeDevChatBot function
-    Value: arn:aws:iam::629872170007:role/be-awesome-dev-chatbot-function-role
